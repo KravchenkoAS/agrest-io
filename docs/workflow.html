@@ -511,7 +511,7 @@ the Design-First approach.</p>
 </div>
 <div class="paragraph">
 <p>Add the <code>openapi-generator-maven-plugin</code> plugin and appropriate settings.
-For more details, please refer to the next section <a href="#configure-and-run-api-generation">Configure and run API generation</a></p>
+For more details, please refer tothe next section <a href="#configure-and-run-api-generation">Configure and run API generation</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -738,7 +738,7 @@ public class CategoryResource {
     @Path("/v1/category")
     @Consumes({ "application/json" })
     public DataResponse&lt;Category&gt; create(String category) {
-        AgRequest agRequest = AgRequest.builder()
+        AgRequest agRequest = Ag.request(config)
                 .build();
 
         return Ag.create(Category.class, config)
@@ -749,8 +749,8 @@ public class CategoryResource {
     @GET
     @Path("/v1/category")
     @Produces({ "application/json" })
-    public DataResponse&lt;Category&gt; getAll(@QueryParam("limit") Limit limit, @QueryParam("start") Start start) {
-        AgRequest agRequest = AgRequest.builder()
+    public DataResponse&lt;Category&gt; getAll(@QueryParam("limit") Integer limit, @QueryParam("start") Integer start) {
+        AgRequest agRequest = Ag.request(config)
                 .limit(limit)
                 .start(start)
                 .build();
@@ -764,7 +764,7 @@ public class CategoryResource {
     @Path("/v1/category/{id}")
     @Produces({ "application/json" })
         public DataResponse&lt;Category&gt; getOne(@PathParam("id") Integer id) {
-        AgRequest agRequest = AgRequest.builder()
+        AgRequest agRequest = Ag.request(config)
                 .build();
 
         return Ag.select(Category.class, config)
